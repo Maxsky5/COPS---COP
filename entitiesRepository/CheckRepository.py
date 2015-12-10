@@ -1,17 +1,15 @@
 # -*-coding: utf-8-*-
-from entities import entities
-from dao import ConnectDb
+from entities.Check import Check
+from dao.ConnectDb import ConnectDb
 
 class CheckRepository:
-    connectDb = None
 
     def __init__(self):
-        self.connectDb = ConnectDb.ConnectDb('localhost', 'dbcops', 'root', '', '3306')
+        print("Repo Check initialized")
 
     def add(self, check):
 
-        session = self.connectDb.session()
-        s = session()
+        s = ConnectDb.session()
         s.add(check)
         s.commit()
         print "checked !"

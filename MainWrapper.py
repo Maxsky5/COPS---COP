@@ -14,5 +14,3 @@ class MainWrapper:
 
 print("Starting Main Class")
 mainClass = MainWrapper("main")
-
-

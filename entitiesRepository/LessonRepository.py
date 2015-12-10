@@ -1,44 +1,41 @@
 # -*-coding: utf-8-*-
-from entities import entities
-from dao import ConnectDb
+from entities.Offender import Offender
+from entities.Lesson_grade import Lesson_grade
+from entities.Lesson import Lesson
+from dao.ConnectDb import ConnectDb
 
 
 class LessonRepository:
-    connectDb = None
 
     def __init__(self):
-        self.connectDb = ConnectDb.ConnectDb('localhost', 'dbcops', 'root', '', '3306')
         print("Repo Lesson initialized")
 
     def getById(self, id):
-        session = self.connectDb.session()
-        s = session()
+        s = ConnectDb.session()
 
-        lesson = s.query(entities.Lesson).filter(entities.Lesson.id == id).one()
+        lesson = s.query(Lesson).filter(Lesson.id == id).one()
         return lesson
 
     def getByStudy(self, idStudy):
-        session = self.connectDb.session()
-        s = session()
+        s = ConnectDb.session()
 
-        lesson = s.query(entities.Lesson)\
-            .join(entities.Offender.grade)\
-            .join(entities.Lesson_grade)\
-            .join(entities.Lesson)\
-            .filter(entities.Offender.id == idStudy)\
+        lesson = s.query(Lesson)\
+            .join(Offender.grade)\
+            .join(Lesson_grade)\
+            .join(Lesson)\
+            .filter(Offender.id == idStudy)\
             .one()
 
         return lesson
 
     def getLessonByStudy(self, idStudy):
-        session = self.connectDb.session()
-        s = session()
+        s = ConnectDb.session()
 
-        lesson = s.query(entities.Lesson)\
-            .join(entities.Offender.grade)\
-            .join(entities.Lesson_grade)\
-            .join(entities.Lesson)\
-            .filter(entities.Offender.id == idStudy)\
+        lesson = s.query(Lesson)\
+            .join(Offender.grade)\
+            .join(Lesson_grade)\
+            .join(Lesson)\
+            .filter(Offender.id == idStudy)\
             .all()
 
         return lesson
