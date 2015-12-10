@@ -1,6 +1,4 @@
 import MotionDetection
-import time
-
 
 
 class MainWrapper:
@@ -14,6 +12,7 @@ class MainWrapper:
         md = MotionDetection.MotionDetection("md")
 
 
-
 print("Starting Main Class")
 mainClass = MainWrapper("main")
+
+
