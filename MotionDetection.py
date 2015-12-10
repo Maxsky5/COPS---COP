@@ -82,7 +82,8 @@ class MotionDetection:
                     print(data)
                     # Here we take the id with the qrcode
                     data = 13
-                    if CheckOffender.check(data):
+                    check = CheckOffender()
+                    if check.check(data):
                         print "Bienvenu !"
                     else:
                         print "T'as rien a foutre ici conard"
