@@ -1,0 +1,232 @@
+{
+  "offenders": [
+    {
+      "id": 1,
+      "firstname": "Maxime",
+      "lastname": "Ribera",
+      "email": "ribera.maxime@gmail.com",
+      "dateUpdate": "2015-12-08 11:07:13",
+      "grade": {
+        "id": 1,
+        "name": "RIL14",
+        "dateStart": "2014-10-08",
+        "dateEnd": "2016-09-18",
+        "dateUpdate": "2015-12-08 11:07:13"
+      },
+      "type": "STUDENT"
+    },
+    {
+      "id": 2,
+      "firstname": "Arthur",
+      "lastname": "Sore",
+      "email": "arthur.soze@gmail.com",
+      "dateUpdate": "2015-12-08 11:07:13",
+      "grade": {
+        "id": 1,
+        "name": "RIL14",
+        "dateStart": "2014-10-08",
+        "dateEnd": "2016-09-18",
+        "dateUpdate": "2015-12-08 11:07:13"
+      },
+      "type": "STUDENT"
+    },
+    {
+      "id": 3,
+      "firstname": "Benjamin",
+      "lastname": "Touchard",
+      "email": "benjamin@kolapsis.fr",
+      "dateUpdate": "2015-12-08 11:07:13",
+      "grade": null,
+      "type": "TEACHER"
+    }
+  ],
+  "grades": [
+    {
+      "id": 1,
+      "name": "RIL14",
+      "dateStart": "2014-10-08",
+      "dateEnd": "2016-09-18",
+      "dateUpdate": "2015-12-08 11:07:13"
+    },
+    {
+      "id": 2,
+      "name": "RAR14",
+      "dateStart": "2014-10-08",
+      "dateEnd": "2016-09-18",
+      "dateUpdate": "2015-12-08 11:07:13"
+    },
+    {
+      "id": 3,
+      "name": "test v3",
+      "dateStart": "2015-12-01",
+      "dateEnd": "2017-02-15",
+      "dateUpdate": "2015-12-10 11:42:17"
+    },
+    {
+      "id": 9,
+      "name": "qdqzdqzdsfsesef",
+      "dateStart": "2015-12-07",
+      "dateEnd": "2016-06-16",
+      "dateUpdate": "2015-12-10 11:42:45"
+    }
+  ],
+  "cops": [
+    {
+      "id": 1,
+      "name": "COP Lacanau",
+      "macAddress": "ddddddddddddddddddddd",
+      "classroom": {
+        "id": 1,
+        "name": "Lacanau",
+        "nbPlace": 20,
+        "dateUpdate": "2015-12-10 12:02:07"
+      },
+      "dateUpdate": "2015-12-10 12:02:07",
+      "dateLastSync": "2015-12-08 11:07:13"
+    },
+    {
+      "id": 2,
+      "name": "COP Biarritz",
+      "macAddress": "bbbbbbbbbbbbbbb",
+      "classroom": {
+        "id": 2,
+        "name": "Biarritz",
+        "nbPlace": 30,
+        "dateUpdate": "2015-12-10 12:02:07"
+      },
+      "dateUpdate": "2015-12-10 11:58:13",
+      "dateLastSync": "2015-12-08 11:07:13"
+    },
+    {
+      "id": 3,
+      "name": "COP Bordeaux",
+      "macAddress": "cccccccccccccccccccc",
+      "classroom": {
+        "id": 3,
+        "name": "Bordeaux",
+        "nbPlace": 12,
+        "dateUpdate": "2015-12-10 12:02:07"
+      },
+      "dateUpdate": "2015-12-10 12:00:43",
+      "dateLastSync": "2015-12-08 11:07:13"
+    },
+    {
+      "id": 4,
+      "name": "Cop Brive",
+      "macAddress": "sekjnqkduqdz53638453zdq",
+      "classroom": null,
+      "dateUpdate": "2015-12-09 14:35:22",
+      "dateLastSync": "2015-12-08 11:07:13"
+    },
+    {
+      "id": 6,
+      "name": "zzzzzzzzzzzzzz",
+      "macAddress": "eeeeeeeeeeee",
+      "classroom": {
+        "id": 1,
+        "name": "Lacanau",
+        "nbPlace": 20,
+        "dateUpdate": "2015-12-10 12:02:07"
+      },
+      "dateUpdate": "2015-12-10 13:43:12",
+      "dateLastSync": "2015-12-08 11:07:13"
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "name": "Raspberry Pi",
+      "teacher": {
+        "id": 3,
+        "firstname": "Benjamin",
+        "lastname": "Touchard",
+        "email": "benjamin@kolapsis.fr",
+        "dateUpdate": "2015-12-08 11:07:13",
+        "grade": null,
+        "type": "TEACHER"
+      },
+      "classroom": {
+        "id": 1,
+        "name": "Lacanau",
+        "nbPlace": 20,
+        "dateUpdate": "2015-12-10 12:02:07"
+      },
+      "grades": [
+        {
+          "id": 1,
+          "name": "RIL14",
+          "dateStart": "2014-10-08",
+          "dateEnd": "2016-09-18",
+          "dateUpdate": "2015-12-08 11:07:13"
+        },
+        {
+          "id": 2,
+          "name": "RAR14",
+          "dateStart": "2014-10-08",
+          "dateEnd": "2016-09-18",
+          "dateUpdate": "2015-12-08 11:07:13"
+        }
+      ],
+      "dateLesson": "2015-12-11",
+      "isMorning": true,
+      "dateUpdate": "2015-12-11 09:39:52"
+    },
+    {
+      "id": 2,
+      "name": "Madera",
+      "teacher": {
+        "id": 3,
+        "firstname": "Benjamin",
+        "lastname": "Touchard",
+        "email": "benjamin@kolapsis.fr",
+        "dateUpdate": "2015-12-08 11:07:13",
+        "grade": null,
+        "type": "TEACHER"
+      },
+      "classroom": {
+        "id": 2,
+        "name": "Biarritz",
+        "nbPlace": 30,
+        "dateUpdate": "2015-12-10 12:02:07"
+      },
+      "grades": [
+        {
+          "id": 1,
+          "name": "RIL14",
+          "dateStart": "2014-10-08",
+          "dateEnd": "2016-09-18",
+          "dateUpdate": "2015-12-08 11:07:13"
+        }
+      ],
+      "dateLesson": "2015-12-16",
+      "isMorning": true,
+      "dateUpdate": "2015-12-10 15:58:35"
+    }
+  ],
+  "classrooms": [
+    {
+      "id": 1,
+      "name": "Lacanau",
+      "nbPlace": 20,
+      "dateUpdate": "2015-12-10 12:02:07"
+    },
+    {
+      "id": 2,
+      "name": "Biarritz",
+      "nbPlace": 30,
+      "dateUpdate": "2015-12-10 12:02:07"
+    },
+    {
+      "id": 3,
+      "name": "Bordeaux",
+      "nbPlace": 12,
+      "dateUpdate": "2015-12-10 12:02:07"
+    },
+    {
+      "id": 4,
+      "name": "qzdqzdqzd",
+      "nbPlace": 50,
+      "dateUpdate": "2015-12-11 09:31:22"
+    }
+  ]
+}

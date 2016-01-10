@@ -13,3 +13,9 @@ class CheckRepository:
         s.add(check)
         s.commit()
         print "checked !"
+
+    def getAll(self):
+        s = ConnectDb.session()
+
+        checks = s.query(Check).all()
+        return checks

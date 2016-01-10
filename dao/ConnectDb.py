@@ -17,22 +17,22 @@ class ConnectDb(object):
 
     @staticmethod
     def session():
-        if ConnectDb.engine is None:
-            config = ConfigParser.ConfigParser()
-            config.read("../config.ini")
-            ConnectDb.host = config.get('database', 'host')
-            ConnectDb.db_name = config.get('database', 'dbname')
-            ConnectDb.username = config.get('database', 'username')
-            ConnectDb.password = config.get('database', 'password')
-            ConnectDb.port = config.get('database', 'port')
-            ConnectDb.engine = create_engine(
-                'mysql://'+ConnectDb.username +
-                ':'+ConnectDb.password +
-                '@'+ConnectDb.host +
-                ':'+ConnectDb.port +
-                '/'+ConnectDb.db_name,
-                echo=True
-            )
-            ConnectDb.Session = sessionmaker(bind=ConnectDb.engine)
+        #if ConnectDb.engine is None:
+        config = ConfigParser.ConfigParser()
+        config.read("../config.ini")
+        ConnectDb.host = config.get('database', 'host')
+        ConnectDb.db_name = config.get('database', 'dbname')
+        ConnectDb.username = config.get('database', 'username')
+        ConnectDb.password = config.get('database', 'password')
+        ConnectDb.port = config.get('database', 'port')
+        ConnectDb.engine = create_engine(
+            'mysql://'+ConnectDb.username +
+            ':'+ConnectDb.password +
+            '@'+ConnectDb.host +
+            ':'+ConnectDb.port +
+            '/'+ConnectDb.db_name,
+            echo=True
+        )
+        ConnectDb.Session = sessionmaker(bind=ConnectDb.engine)
 
         return ConnectDb.Session()

@@ -1,4 +1,8 @@
 # -*-coding: utf-8-*-
+
+import importlib
+import sys
+sys.path.append('D:/workplace/COPS-COP/entities')
 from entities.Grade import Grade
 from entities.Cop import Cop
 from entities.Classroom import Classroom
@@ -10,12 +14,14 @@ from dao.ConnectDb import ConnectDb
 import time
 
 
+
 # Add some records in all tables
 class Fixture:
 
     def __init__(self, name):
+
         self.deleteRecords()
-        self.addRecords()
+        #self.addRecords()
 
     def deleteRecords(self):
 

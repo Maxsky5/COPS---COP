@@ -1,5 +1,5 @@
 # -*-coding: utf-8-*-
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 from dao.ConnectDb import ConnectDb
 
@@ -11,4 +11,5 @@ class Classroom(ConnectDb.Base):
     name = Column(String)
     nb_place = Column(Integer)
     cops = relationship("Cop", backref='classrooms')
-    lesson = relationship("Lesson", uselist=False, backref='classrooms')
+    lesson = relationship("Lesson", uselist=False, backref='classrooms'),
+    date_update = Column(DateTime)
