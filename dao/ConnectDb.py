@@ -18,7 +18,7 @@ class ConnectDb(object):
     def session():
         #if ConnectDb.engine is None:
         config = ConfigParser.ConfigParser()
-        config.read("/home/pi/COPS-COP/config.ini")
+        config.read("../config.ini")
         ConnectDb.host = config.get('database', 'host')
         ConnectDb.db_name = config.get('database', 'dbname')
         ConnectDb.username = config.get('database', 'username')

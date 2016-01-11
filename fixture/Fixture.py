@@ -14,14 +14,13 @@ from dao.ConnectDb import ConnectDb
 import time
 
 
-
 # Add some records in all tables
 class Fixture:
 
     def __init__(self, name):
 
         self.deleteRecords()
-        #self.addRecords()
+        self.addRecords()
 
     def deleteRecords(self):
 
@@ -70,8 +69,8 @@ class Fixture:
         lesson_brive = Lesson(date=time.strftime("%Y%m%d"), is_morning=1, date_update=time.strftime("%Y%m%d"))
 
         # Classrooms & Add lesson
-        soulac_classroom = Classroom(name='soulac', nb_place=20, lesson=lesson_soulac)
-        brive_classroom = Classroom(name='brive', nb_place=20, lesson=lesson_brive)
+        soulac_classroom = Classroom(name='soulac', nb_place=20, lesson=lesson_soulac, date_update=time.strftime("%Y%m%d"))
+        brive_classroom = Classroom(name='brive', nb_place=20, lesson=lesson_brive, date_update=time.strftime("%Y%m%d"))
 
         # add offenders to grade
         ril_grade.offenders = ([thomas, maxime, arthur, adam])
