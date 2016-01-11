@@ -23,7 +23,7 @@ class Synchronization:
 
     def __init__(self):
         config = ConfigParser.ConfigParser()
-        config.read("../config.ini")
+        config.read("/home/pi/COPS-COP/config.ini")
         Synchronization.serverHost = config.get('api', 'Host')
         data = self.getLastData()
         self.addAll(data)
