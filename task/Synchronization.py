@@ -37,10 +37,10 @@ class Synchronization:
 
 
     def getLastData(self):
-        debug = "http://"+Synchronization.serverHost+Synchronization.apiCall+Synchronization.mac
-        print debug
-        data = requests.get("http://"+Synchronization.serverHost+Synchronization.apiCall+Synchronization.mac)
-
+        url = "http://"+Synchronization.serverHost+Synchronization.apiCall+Synchronization.mac
+        print url
+        data = requests.get(url)
+        print data.text
         return data
 
     def addAll(self, jsonData):
