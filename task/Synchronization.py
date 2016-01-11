@@ -37,6 +37,8 @@ class Synchronization:
 
 
     def getLastData(self):
+        debug = "http://"+Synchronization.serverHost+Synchronization.apiCall+Synchronization.mac
+        print debug
         data = requests.get("http://"+Synchronization.serverHost+Synchronization.apiCall+Synchronization.mac)
 
         return data
