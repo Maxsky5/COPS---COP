@@ -41,7 +41,7 @@ class Synchronization:
         print url.strip()
         data = requests.get(url.strip())
         print data.text
-        return data
+        return data.json()
 
     def addAll(self, jsonData):
         s = ConnectDb.session()
