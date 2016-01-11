@@ -1,10 +1,9 @@
 import MotionDetection
-import task.Synchronization
-
+from task.Synchronization import Synchronization
 class MainWrapper:
     def __init__(self, name):
         print("Synchronizing with server..")
-        sync = task.Synchronization
+        sync = Synchronization()
         print("Synchronized OK")
         print("Starting COP")
         self.mainLoop()

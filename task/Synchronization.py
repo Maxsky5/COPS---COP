@@ -113,5 +113,3 @@ class Synchronization:
             )
         s.commit()
 
-
-mainClass = Synchronization()
