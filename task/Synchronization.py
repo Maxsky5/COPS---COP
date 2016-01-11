@@ -10,18 +10,23 @@ from entities.Classroom import Classroom
 from entities.Grade import Grade
 from dao.ConnectDb import ConnectDb
 import json
-
+import requests
+import subprocess
+import ConfigParser
 
 class Synchronization:
+    serverHost = None
+    # mac address
+    mac = subprocess.check_output("ifconfig wlan0 | grep HWaddr | cut -d ' ' -f 10", shell=True)
+    #api call
+    apiCall = "/api/synchronize?copMacAddress="
+
     def __init__(self):
+        config = ConfigParser.ConfigParser()
+        config.read("../config.ini")
+        Synchronization.serverHost = config.get('api', 'Host')
         data = self.getLastData()
         self.addAll(data)
-
-    def sendDateLastSync(self):
-        cop = CopRepository.getByMac('00:00:00:00:00')
-        mavar1 = put('http://127.0.0.1:5000/todo1', data={'data': ""}).json
-
-        print mavar1
 
     def sendCheck(self):
         checks = CheckRepository().getAll()
@@ -32,10 +37,8 @@ class Synchronization:
 
 
     def getLastData(self):
-        file = open("synchronize.json", "r")
-        data = file.read()
+        data = requests.get("http://"+Synchronization.serverHost+Synchronization.apiCall+Synchronization.mac)
 
-        data = json.loads(data)
         return data
 
     def addAll(self, jsonData):

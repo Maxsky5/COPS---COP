@@ -1,9 +1,8 @@
 # -*-coding: utf-8-*-
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from SQLAlchemy.ext.declarative import declarative_base
+from SQLAlchemy import create_engine
+from SQLAlchemy.orm import sessionmaker
 import ConfigParser
-
 
 class ConnectDb(object):
     Base = declarative_base()

@@ -5,6 +5,9 @@ from entitiesRepository.CopRepository import CopRepository
 from entitiesRepository.CheckRepository import CheckRepository
 from entities.Check import Check
 import time
+import subprocess
+
+
 
 class CheckOffender:
     def check(self, id):
@@ -14,7 +17,7 @@ class CheckOffender:
         checkRepo = CheckRepository()
 
         # mac address
-        mac = '00:00:00:00:00:00'
+        mac = subprocess.check_output("ifconfig wlan0 | grep HWaddr | cut -d ' ' -f 10", shell=True)
 
         # looking for the offender in db
         offender = offenderRepo.getById(id)
