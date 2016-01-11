@@ -38,8 +38,8 @@ class Synchronization:
 
     def getLastData(self):
         url = "http://"+Synchronization.serverHost+Synchronization.apiCall+Synchronization.mac
-        print url
-        data = requests.get(url)
+        print url.text.strip()
+        data = requests.get(url.text.strip())
         print data.text
         return data
 
