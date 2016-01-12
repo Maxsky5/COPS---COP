@@ -8,37 +8,33 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema dbcops
+-- Schema cops
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `dbcops` ;
 
 -- -----------------------------------------------------
--- Schema dbcops
+-- Schema cops
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `dbcops` DEFAULT CHARACTER SET utf8mb4 ;
-USE `dbcops` ;
+CREATE SCHEMA IF NOT EXISTS `cops` DEFAULT CHARACTER SET utf8mb4 ;
+USE `cops` ;
 
 -- -----------------------------------------------------
--- Table `dbcops`.`classrooms`
+-- Table `cops`.`classrooms`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`classrooms` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`classrooms` (
+CREATE TABLE IF NOT EXISTS `cops`.`classrooms` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `nb_place` INT(11) NOT NULL DEFAULT '0',
   `date_update` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `dbcops`.`cops`
+-- Table `cops`.`cops`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`cops` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`cops` (
+CREATE TABLE IF NOT EXISTS `cops`.`cops` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `classroom_id` INT(11) NOT NULL,
@@ -49,19 +45,18 @@ CREATE TABLE IF NOT EXISTS `dbcops`.`cops` (
   INDEX `fk_cop_classroom_id_idx` (`classroom_id` ASC),
   CONSTRAINT `fk_cop_classroom_id`
     FOREIGN KEY (`classroom_id`)
-    REFERENCES `dbcops`.`classrooms` (`id`)
+    REFERENCES `cops`.`classrooms` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `dbcops`.`grades`
+-- Table `cops`.`grades`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`grades` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`grades` (
+CREATE TABLE IF NOT EXISTS `cops`.`grades` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `date_start` DATETIME NOT NULL,
@@ -69,39 +64,37 @@ CREATE TABLE IF NOT EXISTS `dbcops`.`grades` (
   `date_update` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `dbcops`.`offenders`
+-- Table `cops`.`offenders`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`offenders` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`offenders` (
+CREATE TABLE IF NOT EXISTS `cops`.`offenders` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `firstname` VARCHAR(45) NOT NULL,
   `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
-  `grade_id` INT(11) NULL,
+  `grade_id` INT(11) NULL DEFAULT NULL,
   `date_update` DATETIME NOT NULL,
   `type` ENUM('teacher', 'student') NOT NULL DEFAULT 'student',
   PRIMARY KEY (`id`),
   INDEX `fk_offender_grade_id_idx` (`grade_id` ASC),
   CONSTRAINT `fk_offender_grade_id`
     FOREIGN KEY (`grade_id`)
-    REFERENCES `dbcops`.`grades` (`id`)
+    REFERENCES `cops`.`grades` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `dbcops`.`checks`
+-- Table `cops`.`checks`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`checks` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`checks` (
+CREATE TABLE IF NOT EXISTS `cops`.`checks` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `offender_id` INT(11) NOT NULL,
   `cop_id` INT(11) NOT NULL,
@@ -111,96 +104,72 @@ CREATE TABLE IF NOT EXISTS `dbcops`.`checks` (
   INDEX `fk_check_cop_id_idx` (`cop_id` ASC),
   CONSTRAINT `fk_check_cop_id`
     FOREIGN KEY (`cop_id`)
-    REFERENCES `dbcops`.`cops` (`id`)
+    REFERENCES `cops`.`cops` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_check_student_id`
     FOREIGN KEY (`offender_id`)
-    REFERENCES `dbcops`.`offenders` (`id`)
+    REFERENCES `cops`.`offenders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `dbcops`.`lessons`
+-- Table `cops`.`lessons`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`lessons` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`lessons` (
+CREATE TABLE IF NOT EXISTS `cops`.`lessons` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `teacher_id` INT(11) NULL DEFAULT NULL,
   `classroom_id` INT(11) NOT NULL,
   `date` DATE NOT NULL,
   `is_morning` TINYINT(1) NOT NULL,
   `date_update` DATETIME NOT NULL,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `unique_lesson_day` (`date` ASC, `is_morning` ASC),
   INDEX `fk_lesson_classrom_id_idx` (`classroom_id` ASC),
   INDEX `fk_lesson_teacher_id_idx` (`teacher_id` ASC),
-  CONSTRAINT `fk_lesson_teacher_id`
-    FOREIGN KEY (`teacher_id`)
-    REFERENCES `dbcops`.`offenders` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_lesson_classrom_id`
     FOREIGN KEY (`classroom_id`)
-    REFERENCES `dbcops`.`classrooms` (`id`)
+    REFERENCES `cops`.`classrooms` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_lesson_teacher_id`
+    FOREIGN KEY (`teacher_id`)
+    REFERENCES `cops`.`offenders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `dbcops`.`lessons_grades`
+-- Table `cops`.`lessons_grades`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`lessons_grades` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`lessons_grades` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `lesson_id` INT NOT NULL,
-  `grade_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `cops`.`lessons_grades` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `lesson_id` INT(11) NOT NULL,
+  `grade_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_lessons_idx` (`lesson_id` ASC),
   INDEX `fk_grades_idx` (`grade_id` ASC),
   CONSTRAINT `fk_grades_idx`
     FOREIGN KEY (`grade_id`)
-    REFERENCES `dbcops`.`grades` (`id`)
+    REFERENCES `cops`.`grades` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_lessons_idx`
     FOREIGN KEY (`lesson_id`)
-    REFERENCES `dbcops`.`lessons` (`id`)
+    REFERENCES `cops`.`lessons` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `dbcops`.`lessons_grades`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `dbcops`.`lessons_grades` ;
-
-CREATE TABLE IF NOT EXISTS `dbcops`.`lessons_grades` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `lesson_id` INT NOT NULL,
-  `grade_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_lessons_idx` (`lesson_id` ASC),
-  INDEX `fk_grades_idx` (`grade_id` ASC),
-  CONSTRAINT `fk_grades_idx`
-    FOREIGN KEY (`grade_id`)
-    REFERENCES `dbcops`.`grades` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_lessons_idx`
-    FOREIGN KEY (`lesson_id`)
-    REFERENCES `dbcops`.`lessons` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

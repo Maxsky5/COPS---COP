@@ -11,5 +11,5 @@ class Classroom(ConnectDb.Base):
     name = Column(String)
     nb_place = Column(Integer)
     cops = relationship("Cop", backref='classrooms')
-    lesson = relationship("Lesson", uselist=False, backref='classrooms')
+    lessons = relationship("Lesson", back_populates='classroom')
     date_update = Column(DateTime)
