@@ -20,7 +20,7 @@ class Synchronization:
     def __init__(self):
         config = ConfigParser.ConfigParser()
         if _platform == "linux" or _platform == "linux2":
-            config.read("home/pi/COPS-COP/config.ini")
+            config.read("/home/pi/COPS-COP/config.ini")
         elif _platform == "win32":
             config.read("../config.ini")
         Synchronization.serverHost = config.get('api', 'Host')
