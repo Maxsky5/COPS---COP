@@ -85,7 +85,6 @@ class MotionDetection:
                     print("QR Detected! Value is:")
                     print(data)
                     # Here we take the id with the qrcode
-                    data = 1
                     check = CheckOffender()
                     if check.check(data):
                         print "Access granted"
