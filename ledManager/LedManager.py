@@ -34,12 +34,3 @@ def blinkSyncProblem():
         time.sleep(2)
         GPIO.output(13,False)
         time.sleep(2)
-
-print("test blink ok")
-blinkOK()
-time.sleep(5)
-print("test blink ko")
-blinkKO()
-time.sleep(5)
-print("test blink sync ko")
-blinkSyncProblem()
