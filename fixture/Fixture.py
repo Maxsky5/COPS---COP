@@ -2,7 +2,6 @@
 
 import importlib
 import sys
-sys.path.append('D:/workplace/COPS-COP/entities')
 from entities.Grade import Grade
 from entities.Cop import Cop
 from entities.Classroom import Classroom
@@ -14,14 +13,25 @@ from dao.ConnectDb import ConnectDb
 import time
 
 
-
 # Add some records in all tables
 class Fixture:
 
     def __init__(self, name):
+        print("fixture init");
 
-        self.deleteRecords()
-        #self.addRecords()
+
+    def testAddWithLink(self):
+
+        # connexion db
+        session = ConnectDb.session()
+
+        ril_grade = Grade(name="ril", date_start='20140901', date_end='20160901', date_update=time.strftime("%Y%m%d"))
+        thomas = Offender(id=1, firstname='thomas', lastname='peyrou', email='thomaspeyrou@gmail.com', date_update=time.strftime("%Y%m%d"), type=2, grade=ril_grade)
+
+        session.add(thomas)
+        session.add(ril_grade)
+        session.commit()
+
 
     def deleteRecords(self):
 
@@ -70,8 +80,8 @@ class Fixture:
         lesson_brive = Lesson(date=time.strftime("%Y%m%d"), is_morning=1, date_update=time.strftime("%Y%m%d"))
 
         # Classrooms & Add lesson
-        soulac_classroom = Classroom(name='soulac', nb_place=20, lesson=lesson_soulac)
-        brive_classroom = Classroom(name='brive', nb_place=20, lesson=lesson_brive)
+        soulac_classroom = Classroom(name='soulac', nb_place=20, lesson=lesson_soulac, date_update=time.strftime("%Y%m%d"))
+        brive_classroom = Classroom(name='brive', nb_place=20, lesson=lesson_brive, date_update=time.strftime("%Y%m%d"))
 
         # add offenders to grade
         ril_grade.offenders = ([thomas, maxime, arthur, adam])
