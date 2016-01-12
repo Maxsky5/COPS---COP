@@ -5,7 +5,7 @@ import time
 import ScanQr
 from PIL import Image
 from task.CheckOffender import CheckOffender
-from ledmanager.LedManager import LedManager
+from ledManager.LedManager import LedManager
 
 
 class MotionDetection:
