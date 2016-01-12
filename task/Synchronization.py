@@ -7,6 +7,7 @@ import requests
 from entitiesRepository.CheckRepository import CheckRepository
 from dao.ConnectDb import ConnectDb
 from utils.ObjectFormater import ObjectFormater
+from sys import platform as _platform
 
 class Synchronization:
     serverHost = None
@@ -18,8 +19,10 @@ class Synchronization:
 
     def __init__(self):
         config = ConfigParser.ConfigParser()
-        config.read("/home/pi/COPS-COP/config.ini")
-        #config.read("../config.ini")
+        if _platform == "linux" or _platform == "linux2":
+            config.read("home/pi/COPS-COP/config.ini")
+        elif _platform == "win32":
+            config.read("../config.ini")
         Synchronization.serverHost = config.get('api', 'Host')
         data = self.getLastData()
         # mon_fichier = open("../information/synchronize.json", "r")

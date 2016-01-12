@@ -2,6 +2,8 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sys import platform as _platform
+
 import ConfigParser
 
 class ConnectDb(object):
@@ -18,7 +20,11 @@ class ConnectDb(object):
     def session():
         #if ConnectDb.engine is None:
         config = ConfigParser.ConfigParser()
-        config.read("../config.ini")
+        if _platform == "linux" or _platform == "linux2":
+            config.read("home/pi/COPS-COP/config.ini")
+        elif _platform == "win32":
+            config.read("../config.ini")
+
         ConnectDb.host = config.get('database', 'host')
         ConnectDb.db_name = config.get('database', 'dbname')
         ConnectDb.username = config.get('database', 'username')
