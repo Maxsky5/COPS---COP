@@ -2,10 +2,12 @@
 import StringIO
 import subprocess
 import time
-import ScanQr
+
 from PIL import Image
+
+import ScanQr
 from task.CheckOffender import CheckOffender
-from ledManager.LedManager import LedManager
+from utils.LedManager import LedManager
 
 
 class MotionDetection:
