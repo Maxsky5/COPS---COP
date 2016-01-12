@@ -62,7 +62,8 @@ class Synchronization:
                 lastname=offender['lastname'],
                 email=offender['email'],
                 date_update=offender['dateUpdate'],
-                type=offender['type']
+                type=offender['type'],
+                grade=grade
             )
             s.add(offender1)
 
