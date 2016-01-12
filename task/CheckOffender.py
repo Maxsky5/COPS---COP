@@ -17,19 +17,20 @@ class CheckOffender:
         checkRepo = CheckRepository()
 
         # mac address
-        mac = subprocess.check_output("ifconfig wlan0 | grep HWaddr | cut -d ' ' -f 10", shell=True)
-
+        #mac = subprocess.check_output("ifconfig wlan0 | grep HWaddr | cut -d ' ' -f 10", shell=True)
+        mac = "6c:19:8f:b8:bd:ff"
         # looking for the offender in db
         offender = offenderRepo.getById(id)
         if len(offender) == 0:
             return False
         offender = offender[0]
+        print offender.firstname
         if offender.is_teacher():
-            lesson = [offender.lesson]
+            lesson = lessonRepo.getLessonByTeacherAndByDate(id, time.strftime("%Y%m%d"))
         else:
-            lesson = lessonRepo.getLessonByStudy(id)
+            lesson = lessonRepo.getLessonByGradeAndByDate(offender.grade_id, time.strftime("%Y%m%d"))
 
-        if len(lesson) == 0:
+        if lesson is None:
             return False
         lesson = lesson[0]
         cop = copRepo.getByMacAndByLesson(mac, lesson.id)

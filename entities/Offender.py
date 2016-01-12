@@ -19,6 +19,6 @@ class Offender(ConnectDb.Base):
     type = Column(Enum, default='STUDENT')
 
     def is_teacher(self):
-        if self.type == 'teacher':
+        if self.type == 'TEACHER':
             return True
         return False
