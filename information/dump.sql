@@ -36,11 +36,11 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cops`.`cops` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `classroom_id` INT(11) NOT NULL,
+  `name` VARCHAR(45) CHARACTER SET 'utf8mb4' NOT NULL,
+  `classroom_id` INT(11) NULL DEFAULT NULL,
   `date_update` DATETIME NOT NULL,
   `date_last_sync` DATETIME NOT NULL,
-  `mac_address` VARCHAR(45) NOT NULL,
+  `mac_address` VARCHAR(45) CHARACTER SET 'utf8mb4' NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_cop_classroom_id_idx` (`classroom_id` ASC),
   CONSTRAINT `fk_cop_classroom_id`
@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS `cops`.`cops` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
-DEFAULT CHARACTER SET = utf8mb4;
+AUTO_INCREMENT = 8
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `cops`.`offenders` (
   `email` VARCHAR(100) NOT NULL,
   `grade_id` INT(11) NULL DEFAULT NULL,
   `date_update` DATETIME NOT NULL,
-  `type` ENUM('teacher', 'student') NOT NULL DEFAULT 'student',
+  `type` ENUM('TEACHER', 'STUDENT') NOT NULL DEFAULT 'STUDENT',
   PRIMARY KEY (`id`),
   INDEX `fk_offender_grade_id_idx` (`grade_id` ASC),
   CONSTRAINT `fk_offender_grade_id`
@@ -151,10 +151,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `cops`.`lessons_grades`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cops`.`lessons_grades` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `lesson_id` INT(11) NOT NULL,
   `grade_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`lesson_id`, `grade_id`),
   INDEX `fk_lessons_idx` (`lesson_id` ASC),
   INDEX `fk_grades_idx` (`grade_id` ASC),
   CONSTRAINT `fk_grades_idx`
@@ -168,8 +167,7 @@ CREATE TABLE IF NOT EXISTS `cops`.`lessons_grades` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
-DEFAULT CHARACTER SET = utf8mb4;
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
