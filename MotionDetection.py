@@ -3,6 +3,7 @@ import StringIO
 import subprocess
 import time
 import ScanQr
+from ledManager.LedManager import LedManager
 from PIL import Image
 from task.CheckOffender import CheckOffender
 
@@ -84,9 +85,11 @@ class MotionDetection:
                     data = 13
                     check = CheckOffender()
                     if check.check(data):
-                        print "Bienvenu !"
+                        print "Access granted"
+                        LedManager.blinkOK()
                     else:
-                        print "T'as rien a foutre ici conard"
+                        print "Access denied"
+                        LedManager.blinkKO()
             else:
                 print("Not changed")
 
