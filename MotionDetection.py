@@ -21,6 +21,7 @@ class MotionDetection:
     forceCapture = False
     forceCaptureTime = 1
     scanner = ()
+    led = LedManager()
 
     def __init__(self, name):
         print("MotionDection initialized")
@@ -88,12 +89,10 @@ class MotionDetection:
                     check = CheckOffender()
                     if check.check(data):
                         print "Access granted"
-                        led = LedManager()
-                        led.blinkOK()
+                        MotionDetection.led.blinkOK()
                     else:
                         print "Access denied"
-                        led = LedManager()
-                        led.blinkKO()
+                        MotionDetection.led.blinkKO()
             else:
                 print("Not changed")
 

@@ -1,10 +1,8 @@
-# -*-coding: utf-8-*-
-
 import RPi.GPIO as GPIO ## Import GPIO library
 import time
 
 
-class LedManager:
+class MotionDetection:
 
     def __init__(self):
         # set modes (out)
