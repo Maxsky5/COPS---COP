@@ -10,13 +10,13 @@ class Offender(ConnectDb.Base):
     id = Column(Integer, primary_key=True)
     firstname = Column(String)
     lastname = Column(String)
-    grade_id = Column(Integer, ForeignKey('grades.id'))
-    grade = relationship('Grade')
+    grade_id = Column(Integer, ForeignKey('grades.id', onupdate="cascade"))
+    grade = relationship('Grade', passive_updates=False)
     check = relationship("Check", backref='offenders')
     lesson = relationship('Lesson', uselist=False, backref='offenders')
     email = Column(String)
     date_update = Column(DateTime)
-    type = Column(Enum, default='Student')
+    type = Column(Enum, default='STUDENT')
 
     def is_teacher(self):
         if self.type == 'teacher':

@@ -2,9 +2,9 @@ from entitiesRepository.CheckRepository import CheckRepository
 from entities.Offender import Offender
 from entities.Cop import Cop
 from entities.Lesson import Lesson
+from entities.Lesson_grade import Lesson_grade
 from entities.Classroom import Classroom
 from entities.Grade import Grade
-from dao.ConnectDb import ConnectDb
 
 class ObjectFormater:
     def __init__(self, name):
@@ -16,9 +16,10 @@ class ObjectFormater:
         if type(offendersList) is dict:
             offendersList = [offendersList]
         for offenderList in offendersList:
-            grade=None
+            grade_id=None
             if offenderList['grade'] is not None:
                 grade = self.GradesToObjects(offenderList['grade'])
+                grade_id = grade.id
             offenders.append(
                 Offender(
                     id=offenderList['id'],
@@ -27,7 +28,7 @@ class ObjectFormater:
                     email=offenderList['email'],
                     date_update=offenderList['dateUpdate'],
                     type=offenderList['type'],
-                    grade=grade
+                    grade_id=grade_id
                 )
             )
         if len(offenders) == 1:
@@ -55,12 +56,31 @@ class ObjectFormater:
         else:
             return grades
 
+    def LessonsGradesToObjects(self, lessons):
+        lessonsGrades = []
+        for lesson in lessons:
+            lessonsGradesJson = lesson['grades']
+            if type(lesson['grades']) is dict:
+                lessonsGradesJson = [lesson['grades']]
+            for lessonGrade in lessonsGradesJson:
+                lessonsGrades.append(
+                    Lesson_grade(
+                        grade_id=lessonGrade['id'],
+                        lesson_id=lesson['id']
+                    )
+                )
+        if len(lessonsGrades) == 1:
+            return lessonsGrades[0]
+        else:
+            return lessonsGrades
+
     def CopsToObjects(self, copsList):
         cops = []
         for copList in copsList:
-            classroom = None
+            classroom_id = None
             if copList['classroom'] is not None:
                 classroom = self.ClassroomsToObjects(copList['classroom'])
+                classroom_id = classroom.id
             cops.append(
                 Cop(
                     id=copList['id'],
@@ -68,7 +88,7 @@ class ObjectFormater:
                     mac_address=copList['macAddress'],
                     date_update=copList['dateUpdate'],
                     date_last_sync=copList['dateLastSync'],
-                    classroom=classroom
+                    classroom_id=classroom_id
                 )
             )
         if len(cops) == 1:
@@ -79,15 +99,14 @@ class ObjectFormater:
     def LessonsToObjects(self, lessonsList):
         lessons = []
         for lessonList in lessonsList:
-            teacher = None
-            classroom = None
-            grades = []
+            teacher_id = None
+            classroom_id = None
             if lessonList['teacher'] is not None:
                 teacher = self.OffendersToObjects(lessonList['teacher'])
+                teacher_id = teacher.id
             if lessonList['classroom'] is not None:
                 classroom = self.ClassroomsToObjects(lessonList['classroom'])
-            if lessonList['grades'] is not None:
-                grades = self.GradesToObjects(lessonList['grades'])
+                classroom_id = classroom.id
             lessons.append(
                 Lesson(
                     id=lessonList['id'],
@@ -95,8 +114,8 @@ class ObjectFormater:
                     is_morning=lessonList['isMorning'],
                     date_update=lessonList['dateUpdate'],
                     date=lessonList['dateLesson'],
-                    offender=teacher,
-                    classroom=classroom
+                    teacher_id=teacher_id,
+                    classroom_id=classroom_id
                 )
             )
         if len(lessons) == 1:

@@ -9,8 +9,8 @@ class Cop(ConnectDb.Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    classroom_id = Column(Integer, ForeignKey('classrooms.id'))
-    classroom = relationship("Classroom", backref='classrooms')
+    classroom_id = Column(Integer, ForeignKey('classrooms.id', onupdate="cascade"))
+    classroom = relationship("Classroom", passive_updates=False)
     date_update = Column(DateTime)
     date_last_sync = Column(DateTime)
     check = relationship("Check", backref='cops')

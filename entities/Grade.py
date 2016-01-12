@@ -12,4 +12,4 @@ class Grade(ConnectDb.Base):
     date_start = Column(DateTime)
     date_end = Column(DateTime)
     date_update = Column(DateTime)
-    offenders = relationship('Offender')
+    offenders = relationship('Offender', passive_updates=False)
