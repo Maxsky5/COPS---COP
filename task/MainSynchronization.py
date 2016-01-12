@@ -1,4 +1,6 @@
 # -*-coding: utf-8-*-
-from Synchronization import Synchronization
+import CheckOffender
 
-Synchronization.sendDateLastSync()
+check = CheckOffender.CheckOffender()
+
+check.check(1)

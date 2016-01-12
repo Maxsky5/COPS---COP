@@ -28,14 +28,26 @@ class LessonRepository:
 
         return lesson
 
-    def getLessonByStudy(self, idStudy):
+    def getLessonByGradeAndByDate(self, idGrade, date):
         s = ConnectDb.session()
 
         lesson = s.query(Lesson)\
             .join(Offender.grade)\
             .join(Lesson_grade)\
             .join(Lesson)\
-            .filter(Offender.id == idStudy)\
+            .filter(Offender.grade_id == idGrade)\
+            .filter(Lesson.date == date)\
+            .all()
+
+        return lesson
+
+    def getLessonByTeacherAndByDate(self, idTeacher, date):
+        s = ConnectDb.session()
+
+        lesson = s.query(Lesson)\
+            .join(Offender.lesson)\
+            .filter(Offender.id == idTeacher)\
+            .filter(Lesson.date == date)\
             .all()
 
         return lesson

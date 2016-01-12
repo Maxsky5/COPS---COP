@@ -6,7 +6,7 @@ class MainRepository:
     def __init__(self):
         print("Starting Repository")
         check = CheckOffender()
-        offender = check.check(91)
+        offender = check.check(1)
         if offender:
             print "Bienvenu !"
         else:
