@@ -8,7 +8,7 @@ class LedManager:
 
     def __init__(self):
         # set modes (out)
-        GPIO.setmode(GPIO.BOARD)
+        #GPIO.setmode(GPIO.BOARD)
         GPIO.setup(7, GPIO.OUT) # red
         GPIO.setup(13, GPIO.OUT) # yellow
         GPIO.setup(11, GPIO.OUT) # green
